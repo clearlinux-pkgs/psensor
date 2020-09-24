@@ -6,7 +6,7 @@
 #
 Name     : psensor
 Version  : 1.2.0
-Release  : 1
+Release  : 2
 URL      : https://wpitchoune.net/psensor/files/psensor-1.2.0.tar.gz
 Source0  : https://wpitchoune.net/psensor/files/psensor-1.2.0.tar.gz
 Source1 : https://wpitchoune.net/psensor/files/psensor-1.2.0.tar.gz.asc
