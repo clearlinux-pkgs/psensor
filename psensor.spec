@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x733A866882A3F5F6 (jeanfi@gmail.com)
 #
 Name     : psensor
-Version  : 1.2.0
-Release  : 2
-URL      : https://wpitchoune.net/psensor/files/psensor-1.2.0.tar.gz
-Source0  : https://wpitchoune.net/psensor/files/psensor-1.2.0.tar.gz
-Source1 : https://wpitchoune.net/psensor/files/psensor-1.2.0.tar.gz.asc
+Version  : 1.2.1
+Release  : 3
+URL      : https://wpitchoune.net/psensor/files/psensor-1.2.1.tar.gz
+Source0  : https://wpitchoune.net/psensor/files/psensor-1.2.1.tar.gz
+Source1  : https://wpitchoune.net/psensor/files/psensor-1.2.1.tar.gz.asc
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
@@ -18,7 +18,6 @@ Requires: psensor-data = %{version}-%{release}
 Requires: psensor-license = %{version}-%{release}
 Requires: psensor-locales = %{version}-%{release}
 Requires: psensor-man = %{version}-%{release}
-BuildRequires : asciidoc
 BuildRequires : cppcheck
 BuildRequires : help2man
 BuildRequires : lm-sensors-dev
@@ -33,10 +32,11 @@ BuildRequires : pkgconfig(libnotify)
 BuildRequires : pkgconfig(udisks2)
 BuildRequires : pkgconfig(x11)
 BuildRequires : pkgconfig(xext)
-Patch1: archlinux-is-error.patch
 
 %description
 :docinfo2:
+:toc:
+:icons: font
 Introduction
 ------------
 Psensor is a graphical hardware monitoring application for Linux.
@@ -93,22 +93,22 @@ man components for the psensor package.
 
 
 %prep
-%setup -q -n psensor-1.2.0
-%patch1 -p1
+%setup -q -n psensor-1.2.1
+cd %{_builddir}/psensor-1.2.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571284684
+export SOURCE_DATE_EPOCH=1605726198
 export GCC_IGNORE_WERROR=1
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
 export NM=gcc-nm
 export CFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FCFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
-export FFLAGS="$CFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FCFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
+export FFLAGS="$FFLAGS -O3 -ffat-lto-objects -flto=4 "
 export CXXFLAGS="$CXXFLAGS -O3 -ffat-lto-objects -flto=4 "
 %configure --disable-static
 make  %{?_smp_mflags}
@@ -118,13 +118,13 @@ export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-make VERBOSE=1 V=1 %{?_smp_mflags} check
+make %{?_smp_mflags} check
 
 %install
-export SOURCE_DATE_EPOCH=1571284684
+export SOURCE_DATE_EPOCH=1605726198
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/psensor
-cp %{_builddir}/psensor-1.2.0/COPYING %{buildroot}/usr/share/package-licenses/psensor/5821ee1deba963c8e12c6af89224de0d0d47bb53
+cp %{_builddir}/psensor-1.2.1/COPYING %{buildroot}/usr/share/package-licenses/psensor/5821ee1deba963c8e12c6af89224de0d0d47bb53
 %make_install
 %find_lang psensor
 
@@ -140,10 +140,12 @@ cp %{_builddir}/psensor-1.2.0/COPYING %{buildroot}/usr/share/package-licenses/ps
 %defattr(-,root,root,-)
 /usr/share/applications/psensor.desktop
 /usr/share/glib-2.0/schemas/psensor.gschema.xml
+/usr/share/icons/hicolor/128x128/apps/psensor.png
 /usr/share/icons/hicolor/14x14/apps/psensor.png
 /usr/share/icons/hicolor/16x16/apps/psensor.png
 /usr/share/icons/hicolor/22x22/apps/psensor.png
 /usr/share/icons/hicolor/24x24/apps/psensor.png
+/usr/share/icons/hicolor/256x256/apps/psensor.png
 /usr/share/icons/hicolor/32x32/apps/psensor.png
 /usr/share/icons/hicolor/48x48/apps/psensor.png
 /usr/share/icons/hicolor/64x64/apps/psensor.png
